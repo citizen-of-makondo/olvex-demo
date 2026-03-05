@@ -19,3 +19,4 @@ captures
 node_modules/
 *.gpg
 gradle.properties
+!gradle.properties
