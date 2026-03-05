@@ -140,8 +140,8 @@ After integration, open your project dashboard at [olvex.dev/app](https://olvex.
 Clone this repo and run the test bench to see the SDK in action:
 
 ```bash
-git clone https://github.com/citizen-of-makondo/olvex-sdk-demo
-cd olvex-sdk-demo
+git clone https://github.com/Olvex-dev/olvex-demo
+cd olvex-demo
 ```
 
 Open in Android Studio, paste your API key in `composeApp/src/commonMain/kotlin/App.kt`, and run.
