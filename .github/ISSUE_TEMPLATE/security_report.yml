@@ -1,0 +1,43 @@
+name: Security Report
+description: Report a potential security issue.
+title: "[Security] <short summary>"
+labels:
+  - type:security
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If this is critical and exploitable, limit public details until a fix is ready.
+  - type: textarea
+    id: vuln_summary
+    attributes:
+      label: Vulnerability Summary
+      description: What is the security issue?
+    validations:
+      required: true
+  - type: textarea
+    id: affected_scope
+    attributes:
+      label: Affected Scope
+      description: Which components/endpoints/versions are affected?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction / Proof
+      description: Repro steps or PoC details.
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: Risk Assessment
+      description: Impact, likelihood, and attack preconditions.
+    validations:
+      required: true
+  - type: textarea
+    id: mitigation
+    attributes:
+      label: Proposed Mitigation
+      description: Short-term and long-term mitigation ideas.
