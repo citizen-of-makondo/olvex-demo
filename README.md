@@ -36,7 +36,7 @@ Add to your `shared` module `build.gradle.kts`:
 
 ```kotlin
 commonMain.dependencies {
-    implementation("dev.olvex:sdk:0.1.0-alpha7")
+    implementation("dev.olvex:sdk:0.1.0-alpha8")
 }
 ```
 
