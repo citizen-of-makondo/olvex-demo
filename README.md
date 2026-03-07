@@ -27,7 +27,7 @@ Olvex is built for KMP from the ground up:
 1. Clone this repo
 2. Open in Android Studio
 3. Paste your API key in `composeApp/src/commonMain/kotlin/dev/olvex/DemoConfig.kt`
-4. Run on Android emulator or device
+4. Run `androidApp` on Android emulator or device
 5. Open your [dashboard](https://olvex.dev/app) and watch events appear
 
 ## Installation
@@ -147,6 +147,13 @@ cd olvex-demo
 ```
 
 Open in Android Studio, paste your API key in `composeApp/src/commonMain/kotlin/dev/olvex/DemoConfig.kt`, and run.
+
+For CLI verification after setup:
+
+```bash
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+./gradlew :composeApp:assembleDebug :androidApp:assembleDebug :composeApp:compileKotlinIosSimulatorArm64
+```
 
 The test bench lets you:
 - Start/end sessions
