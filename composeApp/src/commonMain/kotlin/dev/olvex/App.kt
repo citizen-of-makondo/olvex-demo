@@ -1,5 +1,7 @@
 package dev.olvex.demo
 
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -9,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.olvex.core.Olvex
@@ -58,6 +61,7 @@ private val verificationScenarios = listOf(
     )
 )
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun App() {
     var customEventName by remember { mutableStateOf("") }
@@ -85,8 +89,9 @@ fun App() {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(24.dp)
                     .systemBarsPadding()
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
             ) {
                 // Header
                 Text(
@@ -111,7 +116,11 @@ fun App() {
                 // ── Sessions ──────────────────────────────────────────
                 SectionLabel("Session")
                 Spacer(Modifier.height(8.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     OlvexButton("Start Session", Green) {
                         Olvex.startSession()
                         addLog("✓ Session started via Olvex.startSession()")
@@ -227,7 +236,10 @@ fun App() {
                                         scenario.title,
                                         color = Color.White,
                                         fontSize = 13.sp,
-                                        fontFamily = FontFamily.Monospace
+                                        fontFamily = FontFamily.Monospace,
+                                        modifier = Modifier.weight(1f),
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
                                     )
                                     Text(
                                         status.label,
@@ -242,7 +254,10 @@ fun App() {
                                     fontSize = 11.sp,
                                     fontFamily = FontFamily.Monospace
                                 )
-                                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                FlowRow(
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
                                     MatrixButton("Start", Blue) { updateScenarioStatus(scenario.id, VerificationStatus.IN_PROGRESS) }
                                     MatrixButton("Pass", Green) { updateScenarioStatus(scenario.id, VerificationStatus.PASSED) }
                                     MatrixButton("Fail", Red) { updateScenarioStatus(scenario.id, VerificationStatus.FAILED) }
@@ -253,7 +268,7 @@ fun App() {
                     }
                 }
 
-                Spacer(Modifier.height(32.dp))
+                Spacer(Modifier.height(20.dp))
 
                 // ── Event log ──────────────────────────────────────────
                 SectionLabel("Log")
@@ -263,7 +278,7 @@ fun App() {
                     shape = RoundedCornerShape(8.dp),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(1f)
+                        .heightIn(min = 180.dp, max = 280.dp)
                 ) {
                     LazyColumn(modifier = Modifier.padding(12.dp)) {
                         if (log.isEmpty()) {
